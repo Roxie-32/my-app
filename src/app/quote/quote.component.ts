@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Quote } from '../quote.interface';
+import { QuoteService } from '../quote.service';
 
 @Component({
   selector: 'app-quote',
@@ -7,10 +8,22 @@ import { Quote } from '../quote.interface';
   styleUrls: ['./quote.component.css']
 })
 export class QuoteComponent implements OnInit {
-quote : Quote; 
-  constructor() { }
+@Input() quote : Quote; 
+editing = false;
+editValue='';
+  constructor(private quoteService: QuoteService) { }
 
   ngOnInit(): void {
   }
 
+  onEdit() {
+    this.editing=true;
+    this.editValue=this.quote.content;
+  }
+
+  onUpdate(){
+    this.quoteService.updateQuote()
+    this.editValue='';
+    this.editing = false;
+  }
 }
