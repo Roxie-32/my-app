@@ -14,11 +14,11 @@ quotes:Quote[];
   ngOnInit(): void {
   }
 
-  onGetquotes(){
+  onGetQuotes(){
       this.quoteService.getQuotes()
       .subscribe(
-        (quotes.Quotes[]) => this.quotes = quotes,
-        (error:Response => console.log(error));  
+        (quotes:Quote[]) => this.quotes = quotes,
+        (error:Response )=> console.log(error) 
 
           );
   }
