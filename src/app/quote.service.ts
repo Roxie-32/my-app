@@ -18,7 +18,7 @@ export class QuoteService {
     getQuotes(): Observable<any> {
             return this.http.get('http://localhost:8000/api/quotes')
             .map(
-                (response:  Response) => {
+                (response: any) => {
                     return response.quotes;
                 }
             );
@@ -26,12 +26,12 @@ export class QuoteService {
     updateQuote(id:number, newContent: string){
         const body = JSON.stringify({content:newContent});
         const headers = new HttpHeaders({'Content-Type': 'application/json'});
-            return this.http.put('http://localhost:8000/api/quote' + id, body,{headers:headers})
+            return this.http.put('http://localhost:8000/api/quote/' + id, body,{headers:headers})
             .map(
-                (response: Response) => response.qoute
+                (response: any) => response.quote
             );
     }
     deleteQuote(id:number){
-        return this.http.delete('http://localhost:8000/api/quote');
+        return this.http.delete('http://localhost:8000/api/quote/'+id);
     }
 }

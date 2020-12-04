@@ -20,12 +20,11 @@ quotes:Quote[];
         (quotes:Quote[]) => this.quotes = quotes,
         (error:Response )=> console.log(error) 
 
-          );
+      );
   }
 
   onDeleted(quote: Quote){
     const position =this.quotes.findIndex(
-      
       (quoteEl: Quote)=> {
         return quoteEl.id == quote.id;
       }
