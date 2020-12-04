@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Quote } from '../quote.interface';
 import { QuoteService } from '../quote.service';
 
@@ -9,6 +9,7 @@ import { QuoteService } from '../quote.service';
 })
 export class QuoteComponent implements OnInit {
 @Input() quote : Quote; 
+@Output() quoteDeleted = new  EventEmitter<Quote>();
 editing = false;
 editValue='';
   constructor(private quoteService: QuoteService) { }
@@ -22,8 +23,27 @@ editValue='';
   }
 
   onUpdate(){
-    this.quoteService.updateQuote()
+    this.quoteService.updateQuote(this.quote.id, this.editValue)
+    .subscribe(
+      (quote: Quote) => {
+        this.quote.content= this.editValue;
+        this.editValue='';}
+    );
+    
+    this.editing = false;
+  }
+  onCancel(){
     this.editValue='';
     this.editing = false;
   }
+
+  onDelete(){
+    this.quoteService.deleteQuote(this.quote.id)
+    .subscribe(
+      ()=> {
+        this.quoteDeleted.emit(this.quote);
+        console.log('Quote Deleted');}
+    )
+  }
+ 
 }
