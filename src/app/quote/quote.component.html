@@ -5,11 +5,11 @@
     <div class="panel-footer">
         <div *ngIf="editing">
             <input type="text" [(ngModel)]="editValue">
-            <a (click)="onUpdate()">Save</a>
+            <a (click)="onUpdate()">Save</a><br>
             <a (click)="onCancel()">Cancel</a>
         </div>
         <div *ngIf="!editing">
-            <a (click)="onEdit()">Edit</a>
+            <a (click)="onEdit()">Edit</a><br>
             <a (click)="onDelete()">Delete</a>
         </div>
     </div>
