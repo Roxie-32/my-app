@@ -16,7 +16,7 @@ export class AuthService{
         { email:email, password:password },
         {headers: new HttpHeaders({'X-Requested-With': 'XMLHttpRequest'})})
         .map(
-            (response:Response)=>{
+            (response:any)=>{
                 const token= response.token;
                 const base64Url= token.split('.')[1];
                 const base64=base64Url.replace('-','+').replace('_','/');
